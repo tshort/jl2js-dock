@@ -66,13 +66,13 @@ The first entry convinces Emscripten we need the function, but it can't find it 
 
 ## Emscripten can't run functions called with `ccall`
 
-`ccall` functions don't work, even if they are compiled to LLVM bitcode and linked in with Emscripten. One can work around this by manually editing the generated JavaScript file. For example, to allocate and use vectors, the `_jlplt_jl_alloc_array_1d_47` in the following line needs to be changed to `_jl_alloc_array_1d`. In some cases, you also have to add the function to the list of Emscripten `EXPORTED_FUNCTIONS`, too.
+`ccall` functions don't work, even if they are compiled to LLVM bitcode and linked in with Emscripten. One can work around this by manually editing the generated JavaScript file. For example, to allocate and use vectors, the `_jlplt_jl_alloc_array_1d_47` in the following line needs to be changed to `_jl_alloc_array_1d`. 
 
 ```js
 var FUNCTION_TABLE_iii = [b13,b13,b13,b13,b13,b13,_jlplt_jl_alloc_array_1d_47,b13,b13,b13,b13,b13,b13,b13,b13,b13,b13,b13,b13,b13,b13,b13,_realloc,_calloc,b13,b13,b13,b13,b13
 ```
 
-Another remification of this is that Emscripten may leave out functions (like  `_jl_alloc_array_1d`) because it doesn't know that they are needed. They can be manually added back in.
+Another ramification of this is that Emscripten may leave out functions (like  `_jl_alloc_array_1d`) because it doesn't know that they are needed. They can be manually added back in by adding the function to the list of Emscripten `EXPORTED_FUNCTIONS`.
 
 This likely needs work on the Julia side to convert `ccall`s to direct calls.
 
