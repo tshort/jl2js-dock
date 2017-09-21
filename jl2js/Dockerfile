@@ -41,8 +41,8 @@ ADD julia32.tar.gz /
 WORKDIR /usr/share/julia/base
 RUN julia --output-ji inference.ji coreimg.jl
 RUN julia --output-ji sys.ji --sysimage inference.ji --startup-file=no sysimg.jl
-RUN ls 
 ADD libjulia.bc /usr/share/julia/base/
+ADD libuv.bc /usr/share/julia/base/
 WORKDIR /work
 ADD entrypoint.sh /work
 ENTRYPOINT ["/work/entrypoint.sh"]

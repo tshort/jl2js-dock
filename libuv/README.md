@@ -1,0 +1,1 @@
+Compilation of libuv with Emscripten. This version of libuv is from JuliaLang's fork. It uses hand-written Makefiles.
