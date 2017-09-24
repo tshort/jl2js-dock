@@ -1,0 +1,6 @@
+
+# override JCPPFLAGS = -DSYSTEM_LIBUNWIND
+
+override LLVM_VER = 5.0.0
+override BUILD_LLVM_CLANG = 1
+override JULIA_THREADS := 0
